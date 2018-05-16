@@ -15,7 +15,11 @@
     "background" : {
         "persistent" : false, 
         "scripts" : [
+            "/scripts/jquery.js",
             "/scripts/anchor_marker.js"
         ]
-    }
+    }, 
+    "permissions" : [
+        "webnavigation"
+    ]
 }
