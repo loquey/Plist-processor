@@ -1,25 +1,31 @@
 {
-    "manifest_version" : 2,
-    "name" : "Plist Downloader", 
-    "version" : "0.1", 
-    "description" : "Download OTA iOS app from plist file", 
-    "icons" : {
-        "16" : "/icons/ext-16.png", 
-        "24" : "/icons/ext-24.png",
-        "32" : "/icons/ext-32.png",
-        "64" : "/icons/ext-64.png"
-    }, 
-    "browser_action" : {
-        "default_title" : "Download OTA iOS app from plist file"
-    }, 
-    "background" : {
-        "persistent" : false, 
-        "scripts" : [
-            "/scripts/jquery.js",
-            "/scripts/anchor_marker.js"
-        ]
-    }, 
-    "permissions" : [
-        "webnavigation"
+    "manifest_version": 2,
+    "name": "Plist Downloader",
+    "version": "0.1",
+    "description": "Download OTA iOS app from plist file",
+    "icons": {
+        "16": "/icons/ext-16.png",
+        "24": "/icons/ext-24.png",
+        "32": "/icons/ext-32.png",
+        "64": "/icons/ext-64.png"
+    },
+    "browser_action": {
+        "default_title": "Download OTA iOS app from plist file"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "/scripts/jquery.js",
+                "/scripts/anchor_marker.js"
+            ]
+        }
+    ], 
+    "web_accessible_resources" : [
+        "icons/download-mark.png"
     ]
+    
 }
