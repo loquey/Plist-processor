@@ -21,6 +21,9 @@
             "js": [
                 "/scripts/jquery.js",
                 "/scripts/anchor_marker.js"
+            ],
+            "css" :[
+                "/style/extension.css"
             ]
         }
     ], 

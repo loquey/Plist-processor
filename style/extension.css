@@ -1,0 +1,7 @@
+.plist-marker {
+    margin-left:5px
+}
+
+.plist-marker:hover {
+    cursor: pointer;
+}

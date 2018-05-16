@@ -4,6 +4,7 @@ append a check mark to the link
 */
 var markAttribute = "data-plist-marked";
 var markAttributeValue = "marked";
+
 $(function () {
     $("a[href^='itms-services://'").each(function () {
         var element = $(this);
@@ -28,7 +29,18 @@ function appendMaker($, currentTag) {
     var img = $("<img />");
     img.attr("src", chrome.runtime.getURL("icons/download-mark.png"));
     img.attr("alt", "Download App");
-    img.attr("style", "margin-left:5px");
+    img.addClass("plist-marker");
 
+    img.click(currentTag, postFileLink);
     currentTag.after(img);
+}
+
+function postFileLink(currentTag) {
+    var messsage = {
+        "source" : "download-marker",
+        "url" : currentTag.data.attr("href")
+    }
+    chrome.runtime.sendMessage(messsage, function(response) {
+        console.log(response);
+    });
 }
