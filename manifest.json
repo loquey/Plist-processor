@@ -26,6 +26,11 @@
     ], 
     "web_accessible_resources" : [
         "icons/download-mark.png"
-    ]
+    ], 
+    "background" : {
+        "persistent" : false, 
+        "scripts" : ["/scripts/background.js"]
+    }, 
+    "permissions" : ["contextMenus"]
     
 }
