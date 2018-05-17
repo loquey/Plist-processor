@@ -23,5 +23,29 @@ chrome.runtime.onMessage.addListener(function (message, sender, reply) {
 
 
 function downloadFile(url) {
-    console.log(url);
+    var e = new URL(url);
+    $.get(e.searchParams.get("url"), {}, downloadedData, "xml")
+        .fail(function () {
+            console.log("Error loading plist file");
+        });
+}
+
+function downloadedData(data, textStatus, jqXHR) {
+    var document = $(data);
+    var fileLink = document.find("dict array dict array dict string:last-child").html();
+    chromeDownload(fileLink);
+}
+
+function chromeDownload(link) {
+    var item = {
+        "url" : link,
+        "conflictAction" : "uniquify"
+    };
+    chrome.downloads.download(item, function(downloadId, downloadItem){
+        if (downloadId == undefined) { 
+            console.log("Error downloading iOS app");
+            return;
+        }
+        console.log("iOS app queued for downloaded successfully");
+    })
 }

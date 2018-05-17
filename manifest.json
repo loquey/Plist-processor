@@ -22,18 +22,24 @@
                 "/scripts/jquery.js",
                 "/scripts/anchor_marker.js"
             ],
-            "css" :[
+            "css": [
                 "/style/extension.css"
             ]
         }
-    ], 
-    "web_accessible_resources" : [
+    ],
+    "web_accessible_resources": [
         "icons/download-mark.png"
-    ], 
-    "background" : {
-        "persistent" : false, 
-        "scripts" : ["/scripts/background.js"]
-    }, 
-    "permissions" : ["contextMenus"]
-    
+    ],
+    "background": {
+        "persistent": false,
+        "scripts": [
+            "/scripts/background.js", 
+            "/scripts/jquery.js"
+        ]
+    },
+    "permissions": [
+        "contextMenus",
+        "downloads",
+        "https://*/*"
+    ]
 }
