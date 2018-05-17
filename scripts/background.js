@@ -21,6 +21,15 @@ chrome.runtime.onMessage.addListener(function (message, sender, reply) {
     }
 });
 
+chrome.tabs.onActivated.addListener(function (tabInfo) {
+    var message = {
+        "source" : "page-activated",
+    }
+    
+    chrome.tabs.sendMessage(tabInfo.tabId, message, {}, function(response) {
+        //console.log(response);
+    });
+});
 
 function downloadFile(url) {
     var e = new URL(url);
@@ -39,7 +48,7 @@ function downloadedData(data, textStatus, jqXHR) {
 function chromeDownload(link) {
     var item = {
         "url" : link,
-        "conflictAction" : "uniquify"
+        "conflictAction" : "uniquify",
     };
     chrome.downloads.download(item, function(downloadId, downloadItem){
         if (downloadId == undefined) { 
@@ -49,3 +58,7 @@ function chromeDownload(link) {
         console.log("iOS app queued for downloaded successfully");
     })
 }
+
+chrome.downloads.onCreated.addListener(function(downloadItem) {
+    console.log(downloadItem);
+});

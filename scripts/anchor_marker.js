@@ -6,15 +6,7 @@ var markAttribute = "data-plist-marked";
 var markAttributeValue = "marked";
 
 $(function () {
-    $("a[href^='itms-services://'").each(function () {
-        var element = $(this);
-
-        if (isMarked(element))
-            return;
-
-        markTag(element);
-        appendMaker($, element);
-    });
+    markLinks($);
 });
 
 function isMarked(currentTag) {
@@ -44,3 +36,24 @@ function postFileLink(currentTag) {
         console.log(response);
     });
 }
+
+function markLinks($) {
+    $("a[href^='itms-services://'").each(function () {
+        var element = $(this);
+
+        if (isMarked(element))
+            return;
+
+        markTag(element);
+        appendMaker($, element);
+    });
+}
+
+chrome.runtime.onMessage.addListener(function (message, sender, reply) {
+    console.log("called");
+    if (message.source == "page-activated") {
+        console.log('message received');
+        markLinks($);
+        reply({"page-check" : "started"});
+    }
+});
